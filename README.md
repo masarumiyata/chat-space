@@ -33,15 +33,15 @@ Things you may want to cover:
 
 ### Association
 - has_many :messages
-- has_many :groups, through: groups_users:
+- has_many :groups, through: :groups_users
 
 ## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |body|text||
 |image|string||
-|group_id|integer|null: false|
-|user_id|integer|null: false|
+|group_id|integer|null: false, foreign_key: true|
+|user_id|integer|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
@@ -53,7 +53,7 @@ Things you may want to cover:
 |name|string|null: false|
 
 ### Association
-- has_many :users, through: groups_users:
+- has_many :users, through: :groups_users
 - has_many :message
 
 ## groups_usersテーブル
