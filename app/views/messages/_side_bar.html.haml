@@ -2,12 +2,14 @@
   .side-bar__user-name
     .side-bar__top-items
       %p.side-bar__top-name
-        aaa
+        = current_user.name
       .side-bar__icon
         = link_to "#" ,class: "side-bar__icon__user-edit"  do
           = icon('fas', 'edit')
-        = link_to "#",class: "side-bar__icon__new-group" do
-          = icon('fas', 'cog')
+        -# = link_to "#",class: "side-bar__icon__new-group" do
+        -#   = icon('fas', 'cog')
+        = link_to edit_user_path(current_user) do
+          = icon('fas', 'cog', class: 'icon')
   .side-bar__group-list
     .side-bar__group-box
       .side-bar__group-name
