@@ -1,34 +1,24 @@
 .chat-main
   .chat-main__group-info
     .chat-main__group-info-left
-      test
+      = @group.name
       .chat-main__group-info-left__member-list
-        member : aaa
+        member :
+        - @group.users.each do |user|
+          = user.name
     .chat-main__group-edit-btn
-      = link_to "#" do
+      = link_to edit_group_path(params[:group_id]) do
         Edit
   .chat-main__message-list
-    .chat-main__message-box
-      .chat-main__info
-        .chat-main__group-name
-          k
-        .chat-main__time
-          2020/03/28(Sat) 15:26:32
-          %p.chat-main__message-text
-            まだメッセージがありません
-      .chat-main__info
-        .chat-main__group-name
-          k
-        .chat-main__time
-          2020/03/28(Sat) 15:26:32
-          %p.chat-main__message-text
-            まだメッセージがありません
+    = render @messages
+
   .chat-main__message-form
-    %form.new-message
+    = form_for [@group, @message] do |f|
       .input-box
-        %input{type: "text", class: "input-box__text", placeholder: "type a message"}
-        %label{class: "input-box__image"}
-          = icon('fas', 'image')
-          %input{type: "file", class: "input-box__image__file"}
-      %input{type: "submit", value: "Send", class: "submit-btn"}
-          
+        = f.text_field :content, class: 'input-box__text', placeholder: 'type a message'
+        = f.label :image, class: 'input-box__image' do
+          = icon('fas', 'image', class: 'icon')
+          = f.file_field :image, class: 'input-box__image__file'
+      = f.submit 'Send', class: 'submit-btn'     
+
+    
